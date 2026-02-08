@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>San Valentín ❤️</title>
+
+<style>
+    body {
+        margin: 0;
+        padding: 20px;
+        font-family: Arial, sans-serif;
+        background-color: #f7b6b6;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        text-align: center;
+        overflow-x: hidden;
+        transition: background-color 2s ease;
+    }
+
+    body.cinematic {
+        background-color: #c96a6a;
+    }
+
+    h1 {
+        color: #8b0000;
+        font-size: 2.2em;
+        margin-bottom: 15px;
+    }
+
+    .bouquet {
+        display: grid;
+        grid-template-columns: repeat(9, 16px);
+        grid-auto-rows: 16px;
+        gap: 2px;
+        margin: 15px 0 25px;
+    }
+
+    .pixel { width: 16px; height: 16px; }
+    .white { background: #fff; }
+    .pink { background: #f4c2c2; }
+    .yellow { background: #ffd700; }
+    .green { background: #2e8b57; }
+
+    .buttons {
+        position: relative;
+        width: 100%;
+        max-width: 320px;
+        height: 110px;
+        margin-bottom: 15px;
+    }
+
+    button {
+        font-size: 1.2em;
+        padding: 14px 32px;
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        background-color: #b30000;
+        color: white;
+        position: absolute;
+    }
+
+    #btnSi { left: 20px; top: 30px; }
+    #btnNo { right: 20px; top: 30px; }
+
+    .message {
+        max-width: 90%;
+        background-color: #c40000;
+        color: white;
+        padding: 20px;
+        border-radius: 12px;
+        display: none;
+        margin-top: 20px;
+        opacity: 0;
+        animation: fadeIn 2s forwards;
+        line-height: 1.5;
+    }
+
+    .music {
+        margin-top: 20px;
+        display: none;
+        animation: fadeIn 2s forwards;
+    }
+
+    .signature {
+        margin-top: 25px;
+        font-size: 0.8em;
+        color: #4b0000;
+    }
+
+    .heart {
+        position: fixed;
+        bottom: -20px;
+        font-size: 22px;
+        animation: float 6s linear infinite;
+        opacity: 0.8;
+        pointer-events: none;
+    }
+
+    @keyframes float {
+        from { transform: translateY(0) scale(1); opacity: 1; }
+        to { transform: translateY(-100vh) scale(1.5); opacity: 0; }
+    }
+
+    @keyframes fadeIn {
+        to { opacity: 1; }
+    }
+</style>
+</head>
+
+<body>
+
+<h1>¿Quieres ser mi San Valentín? ❤️</h1>
+
+<div class="bouquet">
+    <div class="pixel"></div><div class="pixel white"></div><div class="pixel"></div><div class="pixel white"></div><div class="pixel"></div><div class="pixel white"></div><div class="pixel"></div><div class="pixel white"></div><div class="pixel"></div>
+    <div class="pixel white"></div><div class="pixel pink"></div><div class="pixel white"></div><div class="pixel pink"></div><div class="pixel yellow"></div><div class="pixel pink"></div><div class="pixel white"></div><div class="pixel pink"></div><div class="pixel white"></div>
+    <div class="pixel"></div><div class="pixel white"></div><div class="pixel pink"></div><div class="pixel white"></div><div class="pixel pink"></div><div class="pixel white"></div><div class="pixel pink"></div><div class="pixel white"></div><div class="pixel"></div>
+    <div class="pixel"></div><div class="pixel"></div><div class="pixel green"></div><div class="pixel"></div><div class="pixel green"></div><div class="pixel"></div><div class="pixel green"></div><div class="pixel"></div><div class="pixel"></div>
+</div>
+
+<div class="buttons">
+    <button id="btnSi" onclick="respuestaSi()">Sí 💖</button>
+    <button id="btnNo">No</button>
+</div>
+
+<div id="mensaje" class="message"></div>
+
+<div id="musica" class="music">
+    <iframe style="border-radius:12px"
+        src="https://open.spotify.com/embed/track/2s0qGz0b6y2Qy8U3yD9r4R?start=29"
+        width="300" height="80"
+        frameborder="0"
+        allow="autoplay; clipboard-write; encrypted-media;">
+    </iframe>
+</div>
+
+<div class="signature">AT: Dann ❤️</div>
+
+<script>
+const btnNo = document.getElementById("btnNo");
+
+btnNo.addEventListener("touchstart", moverBoton);
+btnNo.addEventListener("mouseover", moverBoton);
+
+function moverBoton() {
+    btnNo.style.left = Math.random() * 200 + "px";
+    btnNo.style.top = Math.random() * 70 + "px";
+}
+
+function respuestaSi() {
+    document.body.classList.add("cinematic");
+
+    const mensaje = document.getElementById("mensaje");
+    mensaje.style.display = "block";
+    mensaje.textContent = `Sé que hemos pasado algunas cosas complejas y sé que aún nos falta más, pero todo lo bueno, lo malo o lo difícil que pase, quiero que lo superemos juntos.  
+Porque te amo y estoy decidido a que seas tú la persona con la que pase el resto de mi vida.  
+
+Te amo, mi hermosa ratita albina, muchacha de la India y bella persona ❤️  
+No tengo mucho todavía, pero sigo caminando para tenerlo todo y que todo sea contigo, mi Dulcesito ❤️🫂  
+
+Gracias por seguir eligiéndome cada día.  
+Te amo feliz, enojada, triste… te amo en todas tus formas.  
+A pasitos de tortuga, de aquí hasta la vuelta de los universos infinitos 💫`;
+
+    document.getElementById("musica").style.display = "block";
+    lanzarCorazones();
+}
+
+function lanzarCorazones() {
+    setInterval(() => {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.textContent = "❤️";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = (4 + Math.random() * 3) + "s";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 7000);
+    }, 450);
+}
+</script>
+
+</body>
+</html>
